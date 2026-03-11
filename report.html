@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Report Fraud</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"><style>
+
+body{
+background:#f1f5f9;
+font-family:Arial;
+}
+
+.optional-highlight{
+background:#fff8dc;
+border:2px dashed #ffc107;
+}
+
+footer{
+margin-top:40px;
+padding:15px;
+text-align:center;
+background:#f1f5f9;
+font-size:14px;
+}
+
+</style></head><body><nav class="navbar navbar-dark bg-primary">
+<div class="container"><a class="navbar-brand" href="index.html">
+Fraud Checker BD
+</a></div>
+</nav><div class="container mt-4"><h3 class="mb-4">Report a Scammer</h3><form id="reportForm"><div class="mb-3">
+<label class="form-label">Scammer Name</label>
+<input type="text" id="name" class="form-control" required>
+</div><div class="mb-3">
+<label class="form-label">Phone Number</label>
+<input type="text" id="phone" class="form-control" required>
+</div><div class="mb-3">
+<label class="form-label">Bkash / Nagad Number</label>
+<input type="text" id="bkash" class="form-control">
+</div><div class="mb-3">
+<label class="form-label">Facebook Profile Link</label>
+<input type="text" id="facebook" class="form-control">
+</div><div class="mb-3">
+<label class="form-label">
+Scammer Photo <span class="text-muted">(Optional)</span>
+</label>
+<input type="file" id="photo" class="form-control">
+</div><div class="mb-3">
+<label class="form-label">Evidence Screenshot</label>
+<input type="file" id="evidence" class="form-control">
+</div><div class="mb-3">
+<label class="form-label">Fraud Description</label>
+<textarea id="reason" class="form-control" required></textarea>
+</div><div class="mb-3">
+<label class="form-label">
+Your Nickname <span class="text-muted">(Optional)</span>
+</label>
+<input type="text" id="reporter" class="form-control optional-highlight" placeholder="Optional">
+</div><button class="btn btn-danger">Submit Report</button>
+
+</form></div><footer>© <a href="https://t.me/mahim_pmz" target="_blank" style="text-decoration:none;font-weight:bold">
+Md Mahim
+</a> • Built with ❤️ in Bangladesh
+
+</footer><script>
+
+const API_URL = "https://script.google.com/macros/s/AKfycbz-2AhF5okvBp-VXDNrLDfBt39aAwkh82LRu3B0TaKksGICxBCzSgZN3KrsC8kt-8yh/exec"
+
+document.getElementById("reportForm").addEventListener("submit", function(e){
+
+e.preventDefault()
+
+const formData = new FormData()
+
+formData.append("name", document.getElementById("name").value)
+formData.append("phone", document.getElementById("phone").value)
+formData.append("reason", document.getElementById("reason").value)
+formData.append("reporter", document.getElementById("reporter").value)
+formData.append("time", new Date().toLocaleString())
+formData.append("photo", "https://via.placeholder.com/300")
+
+fetch(API_URL,{
+method:"POST",
+body: formData
+})
+.then(res => res.text())
+.then(() => {
+
+alert("Report submitted successfully")
+
+window.location = "index.html"
+
+})
+
+})
+
+</script></body>
+</html>
